@@ -1,4 +1,4 @@
-using System;
+using FluentAssertions;
 using Xunit;
 
 namespace Chalk.Tests
@@ -11,34 +11,20 @@ namespace Chalk.Tests
         [Fact]
         public void TestGreen()
         {
-            var input = "some text";
-            var result = Green(input);
-            
-            Assert.Equal("\u001b[32msome text\u001b[0m", result);
+            new Output().Green("some text").Should().Be("\u001b[32msome text\u001b[0m");
         }
         
         [Fact]
         public void TestRed()
         {
-            var input = "some text";
-            var result = Red(input);
-            
-            Assert.Equal("\u001b[31msome text\u001b[0m", result);
+            new Output().Red("some text").Should().Be("\u001b[31msome text\u001b[0m");
         }
 
-        private static string Green(string input)
+        [Fact]
+        public void Nested()
         {
-            return Color(input, "32");
-        }
-
-        private static string Color(string input, string code)
-        {
-            return $"\u001b[{code}m{input}[0m";
-        }
-
-        private static string Red(string input)
-        {
-            return Color(input, "31");
+            var output = new Output();
+            output.Green("green ", output.Red("red")).Should().Be("\u001b[32mgreen \u001b[0m\u001b[32m\u001b[31mred\u001b[0m\u001b[0m");
         }
     }
 }
