@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using FluentAssertions;
@@ -46,6 +47,16 @@ namespace Chalk.Tests
         public void OutputContainsMethodsForAllColors()
         {
             typeof(Output).GetMembers(BindingFlags.Public | BindingFlags.Static).Select(s => s.Name).Should().BeEquivalentTo(Enum.GetNames(typeof(Colors)));
+        }
+        
+        [Fact]
+        public void AllOutputInSpecifiedColor()
+        {
+            foreach (var m in typeof(Output).GetMethods(BindingFlags.Public | BindingFlags.Static))
+            {
+                var code = Enum.Parse(typeof(Colors), m.Name);
+                m.Invoke(null, new[] { "input" }).Should().Be($"\u001b[{(int)code}minput\u001b[0m");
+            }
         }
     }
 }
