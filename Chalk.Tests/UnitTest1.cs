@@ -46,17 +46,52 @@ namespace Chalk.Tests
         [Fact]
         public void OutputContainsMethodsForAllColors()
         {
-            typeof(Output).GetMembers(BindingFlags.Public | BindingFlags.Static).Select(s => s.Name).Should().BeEquivalentTo(Enum.GetNames(typeof(Colors)));
+            var colors = typeof(Colors).GetRuntimeFields().Select(s => s.Name);
+            var methods = typeof(Output).GetMembers(BindingFlags.Public | BindingFlags.Static).Select(s => s.Name);
+            
+            colors.Should().BeSubsetOf(methods);
         }
         
         [Fact]
         public void AllOutputInSpecifiedColor()
         {
-            foreach (var m in typeof(Output).GetMethods(BindingFlags.Public | BindingFlags.Static))
+            var colors = typeof(Colors)
+                .GetRuntimeFields();
+            foreach (var c in colors)
             {
-                var code = Enum.Parse(typeof(Colors), m.Name);
-                m.Invoke(null, new[] { "input" }).Should().Be($"\u001b[{(int)code}minput\u001b[0m");
+                typeof(Output).GetMethod(c.Name).Invoke(null, new[] { "input" }).Should().Be($"\u001b[{c.GetRawConstantValue()}minput\u001b[0m");
             }
+        }
+        
+        [Fact]
+        public void AlDecorationsInSpecifiedColor()
+        {
+            var colors = typeof(Decorations)
+                .GetRuntimeFields();
+            foreach (var c in colors)
+            {
+                typeof(Output).GetMethod(c.Name).Invoke(null, new[] { "input" }).Should().Be($"\u001b[{c.GetRawConstantValue()}minput\u001b[0m");
+            }
+        }
+        
+        [Fact]
+        public void AllOutputInSpecifiedBrightColor()
+        {
+            var colors = typeof(Colors)
+                .GetRuntimeFields();
+            foreach (var c in colors)
+            {
+                var method = typeof(Output).GetMethod($"Bright{c.Name}");
+
+                method.Should().NotBeNull($"No bright method found for {c.Name}");
+                method.Invoke(null, new[] { "input" }).Should().Be($"\u001b[{c.GetRawConstantValue()};1minput\u001b[0m");
+            }
+        }
+
+        [Fact]
+        public void BrightBlack()
+        {
+            Output.BrightBlack("input").Should().Be("\u001b[30;1minput\u001b[0m");
         }
     }
 }
