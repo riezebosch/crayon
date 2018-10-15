@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using System.Reflection;
 using FluentAssertions;
 using Microsoft.VisualBasic.CompilerServices;
 using Xunit;
@@ -38,6 +40,12 @@ namespace Chalk.Tests
         public void NestedBoldRequiresReset()
         {
             Output.Red($"{Output.Bold("bold")} text").Should().Be("\u001b[31m\u001b[1mbold\u001b[0m\u001b[31m text\u001b[0m");
+        }
+
+        [Fact]
+        public void OutputContainsMethodsForAllColors()
+        {
+            typeof(Output).GetMembers(BindingFlags.Public | BindingFlags.Static).Select(s => s.Name).Should().BeEquivalentTo(Enum.GetNames(typeof(Colors)));
         }
     }
 }
