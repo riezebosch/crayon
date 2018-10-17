@@ -2,7 +2,7 @@
 
 namespace Chalk
 {
-    public class Output
+    public static class Output
     {
         private const string Normal = "\u001b[{0}m";
         private const string Bright = "\u001b[{0};1m";
@@ -20,7 +20,7 @@ namespace Chalk
         public static string Bold(string input) => Format(input, Decorations.Bold, Normal);
         public static string Underline(string input) => Format(input, Decorations.Underline, Normal);
         public static string Reversed(string input) => Format(input, Decorations.Reversed, Normal);
-        
+
         public static string BrightBlack(string input) => Format(input, Colors.Black, Bright);
         public static string BrightRed(string input) => Format(input, Colors.Red, Bright);
         public static string BrightGreen(string input) => Format(input, Colors.Green, Bright);
@@ -29,7 +29,7 @@ namespace Chalk
         public static string BrightMagenta(string input) => Format(input, Colors.Magenta, Bright);
         public static string BrightCyan(string input) => Format(input, Colors.Cyan, Bright);
         public static string BrightWhite(string input) => Format(input, Colors.White, Bright);
-        
+
         private static string Format(string input, byte color, string format)
         {
             var code = string.Format(format, (int) color);
@@ -41,5 +41,17 @@ namespace Chalk
             return input.Replace(Reset, $"{Reset}{code}");
         }
 
+        public static IOutput Black() => new OutputChain(Colors.Black);
+        public static IOutput Red() => new OutputChain(Colors.Red);
+        public static IOutput Green() => new OutputChain(Colors.Green);
+        public static IOutput Yellow() => new OutputChain(Colors.Yellow);
+        public static IOutput Blue() => new OutputChain(Colors.Blue);
+        public static IOutput Magenta() => new OutputChain(Colors.Magenta);
+        public static IOutput Cyan() => new OutputChain(Colors.Cyan);
+        public static IOutput White() => new OutputChain(Colors.White);
+        
+        public static IOutput Bold() => new OutputChain(Decorations.Bold);
+        public static IOutput Underline() => new OutputChain(Decorations.Underline);
+        public static IOutput Reversed() => new OutputChain(Decorations.Reversed);
     }
 }

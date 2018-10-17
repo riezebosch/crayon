@@ -12,7 +12,7 @@ namespace Chalk.ConsoleApp
 
             Console.WriteLine(Output.Green($"The difference {Output.Bold("between bold")} and {Output.BrightGreen("bright green")}"));
             
-            //Console.WriteLine(Output.Green().Bold().Text("hoi!"));
+            Console.WriteLine(Output.Green().Bold().Underline().Reversed().Text("hoi!"));
         }
     }
 }
