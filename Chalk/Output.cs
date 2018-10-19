@@ -8,6 +8,11 @@ namespace Chalk
         private const string Bright = "\u001b[{0};1m";
         private const string Reset = "\u001b[0m";
 
+        static Output()
+        {
+            ColorsOnWindows.Enable();
+        }
+
         public static string Black(string input) => Format(input, Colors.Black, Normal);
         public static string Red(string input) => Format(input, Colors.Red, Normal);
         public static string Green(string input) => Format(input, Colors.Green, Normal);
