@@ -6,7 +6,7 @@ using FluentAssertions;
 using Microsoft.VisualBasic.CompilerServices;
 using Xunit;
 
-namespace Chalk.Tests
+namespace Crayon.Tests
 {
     /// <summary>
     /// http://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html

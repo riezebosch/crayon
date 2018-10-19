@@ -1,4 +1,4 @@
-namespace Chalk
+namespace Crayon
 {
     internal class OutputChain : IOutput
     {

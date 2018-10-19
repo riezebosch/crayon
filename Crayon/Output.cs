@@ -1,6 +1,6 @@
-[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Chalk.Tests")]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Crayon.Tests")]
 
-namespace Chalk
+namespace Crayon
 {
     public static class Output
     {

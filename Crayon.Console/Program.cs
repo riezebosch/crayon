@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Chalk.ConsoleApp
+namespace Crayon.ConsoleApp
 {
     class Program
     {

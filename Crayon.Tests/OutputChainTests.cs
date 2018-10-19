@@ -4,7 +4,7 @@ using System.Reflection;
 using FluentAssertions;
 using Xunit;
 
-namespace Chalk.Tests
+namespace Crayon.Tests
 {
     public class OutputChainTests
     {

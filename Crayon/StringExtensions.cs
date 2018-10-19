@@ -1,4 +1,4 @@
-namespace Chalk
+namespace Crayon
 {
     public static class StringExtensions
     {

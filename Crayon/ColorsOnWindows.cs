@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace Chalk
+namespace Crayon
 {
     /// https://www.jerriepelser.com/blog/using-ansi-color-codes-in-net-console-apps/
     internal static class ColorsOnWindows

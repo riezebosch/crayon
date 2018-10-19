@@ -1,10 +1,10 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chalk.Tests", "Chalk.Tests\Chalk.Tests.csproj", "{12F0B494-6970-49E2-BC7F-DF79AFD04EE2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crayon.Tests", "Crayon.Tests\Crayon.Tests.csproj", "{12F0B494-6970-49E2-BC7F-DF79AFD04EE2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chalk.Console", "Chalk.Console\Chalk.Console.csproj", "{2166FB5A-3F36-4E0D-8FEE-370211B94414}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crayon.Console", "Crayon.Console\Crayon.Console.csproj", "{2166FB5A-3F36-4E0D-8FEE-370211B94414}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chalk", "Chalk\Chalk.csproj", "{2FBC4E7B-F9F8-4FD0-837A-809C5334861F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crayon", "Crayon\Crayon.csproj", "{2FBC4E7B-F9F8-4FD0-837A-809C5334861F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
