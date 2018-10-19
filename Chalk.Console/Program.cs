@@ -13,6 +13,8 @@ namespace Chalk.ConsoleApp
             Console.WriteLine(Output.Green($"The difference {Output.Bold("between bold")} and {Output.BrightGreen("bright green")}"));
             
             Console.WriteLine(Output.Green().Bold().Underline().Reversed().Text("hoi!"));
+
+            Console.WriteLine(Output.Bold().Green().Text($"starting green {Output.Red("then red")} must be green again"));
         }
     }
 }

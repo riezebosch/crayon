@@ -33,12 +33,7 @@ namespace Chalk
         private static string Format(string input, byte color, string format)
         {
             var code = string.Format(format, (int) color);
-            return $"{code}{ReplaceInterpolatedResets(input, code)}{Reset}";
-        }
-
-        private static string ReplaceInterpolatedResets(string input, string code)
-        {
-            return input.Replace(Reset, $"{Reset}{code}");
+            return $"{code}{input.FormattingAfterReset(code)}{Reset}";
         }
 
         public static IOutput Black() => new OutputChain(Colors.Black);

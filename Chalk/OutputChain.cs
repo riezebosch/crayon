@@ -28,6 +28,6 @@ namespace Chalk
         public IOutput Underline() => AppendFormat(Decorations.Underline);
         public IOutput Reversed() => AppendFormat(Decorations.Reversed);
 
-        public string Text(string input) => $"{_formatting}{input}\u001b[0m";
+        public string Text(string input) => $"{_formatting}{input.FormattingAfterReset(_formatting)}\u001b[0m";
     }
 }

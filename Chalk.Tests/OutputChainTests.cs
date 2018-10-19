@@ -63,5 +63,11 @@ namespace Chalk.Tests
                 o.Text("input").Should().Be($"\u001b[99m\u001b[{c.Value}minput\u001b[0m");
             }
         }
+
+        [Fact]
+        public void NestedResetsReplaced()
+        {
+            Output.Green().Text($"something {Output.Red("red in the middle")} but green again").Should().Be("\u001b[32msomething \u001b[31mred in the middle\u001b[0m\u001b[32m but green again\u001b[0m");
+        }
     }
 }
