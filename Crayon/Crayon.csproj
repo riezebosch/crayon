@@ -6,4 +6,16 @@
         <RootNamespace>Crayon</RootNamespace>
     </PropertyGroup>
 
+    <PropertyGroup>
+        <Authors>Manuel Riezebosch</Authors>
+        <NeutralLanguage>en-US</NeutralLanguage>
+        <AssemblyTitle>Crayon</AssemblyTitle>
+        <Description>Chalk for .NET Core!</Description>
+        <PackageReleaseNotes>Hello world!</PackageReleaseNotes>
+        <PackageTags>ansii;colors;chalk</PackageTags>
+        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+        <RepositoryType>git</RepositoryType>
+        <RepositoryUrl>https://github.com/riezebosch/crayon.git</RepositoryUrl>
+        <Version>0.0.1</Version>
+    </PropertyGroup>
 </Project>

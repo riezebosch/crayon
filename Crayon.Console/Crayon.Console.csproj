@@ -5,6 +5,7 @@
         <TargetFramework>netcoreapp2.1</TargetFramework>
         <AssemblyName>Crayon.ConsoleApp</AssemblyName>
         <RootNamespace>Crayon.ConsoleApp</RootNamespace>
+        <IsPackable>false</IsPackable>
     </PropertyGroup>
 
     <ItemGroup>

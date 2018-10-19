@@ -2,11 +2,8 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp2.1</TargetFramework>
-
         <IsPackable>false</IsPackable>
-
         <AssemblyName>Crayon.Tests</AssemblyName>
-
         <RootNamespace>Crayon.Tests</RootNamespace>
     </PropertyGroup>
 
