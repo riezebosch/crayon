@@ -1,3 +1,6 @@
+[![build](https://ci.appveyor.com/api/projects/status/8dnbd2u8t737lm21/branch/master?svg=true)](https://ci.appveyor.com/project/riezebosch/crayon/branch/master)
+[![nuget](https://img.shields.io/nuget/v/Crayon.svg)](https://www.nuget.org/packages/Crayon/)
+
 # Crayon
 An easy peasy tiny library for coloring console output in inline strings using ANSI escape codes.
 
