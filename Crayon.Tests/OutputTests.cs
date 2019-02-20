@@ -97,7 +97,6 @@ namespace Crayon.Tests
         {
             Output.BrightBlack("input").Should().Be("\u001b[30;1minput\u001b[0m");
         }
-
         
         [Fact]
         public void OutputContainsFactoryMethodsForAllColors()

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 
 namespace Crayon.ConsoleApp
 {
@@ -15,6 +16,8 @@ namespace Crayon.ConsoleApp
             Console.WriteLine(Output.Green().Bold().Underline().Reversed().Text("hoi!"));
 
             Console.WriteLine(Output.Bold().Green().Text($"starting green {Output.Red("then red")} must be green again"));
+            
+            Console.WriteLine(Output.FromRgb(55, 115, 155).Text("from rgb!"));
         }
     }
 }

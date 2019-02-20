@@ -14,5 +14,6 @@ namespace Crayon
         IOutput Underline();
         IOutput Reversed();
         string Text(string input);
+        IOutput FromRgb(byte r, byte g, byte b);
     }
 }

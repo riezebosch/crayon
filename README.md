@@ -34,3 +34,5 @@ My journey for using ANSI codes in C# first brought me here: https://www.jerriep
 The ANSI coloring details was inspired by this blog post: http://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html
 
 The code for enabling ANSI colors feature on Windows was borrowed from this issue: https://github.com/Microsoft/WSL/issues/1873 
+
+No greater compliment than someone [taking your work for inspiration](https://github.com/silkfire/Pastel). In return I peaked into his code for the RGB support!

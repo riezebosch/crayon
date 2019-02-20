@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
@@ -11,7 +11,7 @@
         <NeutralLanguage>en-US</NeutralLanguage>
         <AssemblyTitle>Crayon</AssemblyTitle>
         <Description>Chalk for .NET Core!</Description>
-        <PackageReleaseNotes>Hello world!</PackageReleaseNotes>
+        <PackageReleaseNotes>Output.FromRgb(55, 115, 233).Text("from rgb!")</PackageReleaseNotes>
         <PackageTags>ansii;colors;chalk</PackageTags>
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
         <RepositoryType>git</RepositoryType>

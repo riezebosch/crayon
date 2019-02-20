@@ -9,9 +9,19 @@ namespace Crayon
             AppendFormat(color);
         }
 
+        internal OutputChain(string format)
+        {
+            _formatting = format;
+        }        
+        
         private OutputChain AppendFormat(int code)
         {
-            _formatting += $"\u001b[{code}m";
+            return AppendFormat($"\u001b[{code}m");
+        }
+
+        private OutputChain AppendFormat(string format)
+        {
+            _formatting += format;
             return this;
         }
 
@@ -23,6 +33,7 @@ namespace Crayon
         public IOutput Magenta() => AppendFormat(Colors.Magenta);
         public IOutput Cyan() => AppendFormat(Colors.Cyan);
         public IOutput White() => AppendFormat(Colors.White);
+        public IOutput FromRgb(byte r, byte g, byte b) => AppendFormat($"\u001b[38;2;{r};{g};{b}m");
 
         public IOutput Bold() => AppendFormat(Decorations.Bold);
         public IOutput Underline() => AppendFormat(Decorations.Underline);

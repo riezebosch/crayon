@@ -53,5 +53,7 @@ namespace Crayon
         public static IOutput Bold() => new OutputChain(Decorations.Bold);
         public static IOutput Underline() => new OutputChain(Decorations.Underline);
         public static IOutput Reversed() => new OutputChain(Decorations.Reversed);
+
+        public static IOutput FromRgb(byte r, byte g, byte b) => new OutputChain($"\u001b[38;2;{r};{g};{b}m");
     }
 }
