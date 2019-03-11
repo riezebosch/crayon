@@ -39,6 +39,12 @@ namespace Crayon.Tests
         }
 
         [Fact]
+        public void TestDim()
+        {
+            Output.Dim("some text").Should().Be("\u001b[2msome text\u001b[0m");
+        }
+
+        [Fact]
         public void NestedBoldRequiresReset()
         {
             Output.Red($"{Output.Bold("bold")} text").Should()
@@ -97,7 +103,7 @@ namespace Crayon.Tests
         {
             Output.BrightBlack("input").Should().Be("\u001b[30;1minput\u001b[0m");
         }
-        
+
         [Fact]
         public void OutputContainsFactoryMethodsForAllColors()
         {

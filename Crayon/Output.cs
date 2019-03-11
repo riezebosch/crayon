@@ -23,6 +23,7 @@ namespace Crayon
         public static string White(string input) => Format(input, Colors.White, Normal);
 
         public static string Bold(string input) => Format(input, Decorations.Bold, Normal);
+        public static string Dim(string input) => Format(input, Decorations.Dim, Normal);
         public static string Underline(string input) => Format(input, Decorations.Underline, Normal);
         public static string Reversed(string input) => Format(input, Decorations.Reversed, Normal);
 
@@ -49,8 +50,9 @@ namespace Crayon
         public static IOutput Magenta() => new OutputChain(Colors.Magenta);
         public static IOutput Cyan() => new OutputChain(Colors.Cyan);
         public static IOutput White() => new OutputChain(Colors.White);
-        
+
         public static IOutput Bold() => new OutputChain(Decorations.Bold);
+        public static IOutput Dim() => new OutputChain(Decorations.Dim);
         public static IOutput Underline() => new OutputChain(Decorations.Underline);
         public static IOutput Reversed() => new OutputChain(Decorations.Reversed);
 

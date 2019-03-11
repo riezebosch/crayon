@@ -11,6 +11,7 @@ namespace Crayon
         IOutput Cyan();
         IOutput White();
         IOutput Bold();
+        IOutput Dim();
         IOutput Underline();
         IOutput Reversed();
         string Text(string input);
