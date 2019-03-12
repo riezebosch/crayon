@@ -12,8 +12,8 @@ namespace Crayon
         internal OutputChain(string format)
         {
             _formatting = format;
-        }        
-        
+        }
+
         private OutputChain AppendFormat(int code)
         {
             return AppendFormat($"\u001b[{code}m");
@@ -36,6 +36,7 @@ namespace Crayon
         public IOutput FromRgb(byte r, byte g, byte b) => AppendFormat($"\u001b[38;2;{r};{g};{b}m");
 
         public IOutput Bold() => AppendFormat(Decorations.Bold);
+        public IOutput Dim() => AppendFormat(Decorations.Dim);
         public IOutput Underline() => AppendFormat(Decorations.Underline);
         public IOutput Reversed() => AppendFormat(Decorations.Reversed);
 
