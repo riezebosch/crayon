@@ -11,8 +11,13 @@ namespace Crayon.Tests
     /// <summary>
     /// http://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html
     /// </summary>
+    [Collection("color")]
     public class OutputTests
     {
+        public OutputTests()
+        {
+            Output.Enable();
+        }
         [Fact]
         public void TestGreen()
         {

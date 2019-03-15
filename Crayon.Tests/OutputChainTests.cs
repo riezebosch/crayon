@@ -6,8 +6,14 @@ using Xunit;
 
 namespace Crayon.Tests
 {
+    [Collection("color")]
     public class OutputChainTests
     {
+        public OutputChainTests()
+        {
+            Output.Enable();
+        }
+        
         [Fact]
         public void Chaining()
         {
