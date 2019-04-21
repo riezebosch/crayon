@@ -29,5 +29,7 @@ namespace Crayon
         public string Text(string input) => input;
 
         public IOutput FromRgb(byte r, byte g, byte b) => this;
+
+        public IOutput Rainbow(double freq, int idx) => this;
     }
 }

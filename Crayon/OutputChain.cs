@@ -1,3 +1,5 @@
+using System;
+
 namespace Crayon
 {
     internal class OutputChain : IOutput
@@ -34,6 +36,13 @@ namespace Crayon
         public IOutput Cyan() => AppendFormat(Colors.Cyan);
         public IOutput White() => AppendFormat(Colors.White);
         public IOutput FromRgb(byte r, byte g, byte b) => AppendFormat($"\u001b[38;2;{r};{g};{b}m");
+        public IOutput Rainbow(double freq, int idx)
+        {
+            byte r = Convert.ToByte(Math.Round(Math.Sin(freq * idx) * 127 + 128));
+            byte g = Convert.ToByte(Math.Round(Math.Sin(freq * idx + 2) * 127 + 128));
+            byte b = Convert.ToByte(Math.Round(Math.Sin(freq * idx + 4) * 127 + 128));
+            return AppendFormat($"\u001b[38;2;{r};{g};{b}m");
+        }
 
         public IOutput Bold() => AppendFormat(Decorations.Bold);
         public IOutput Dim() => AppendFormat(Decorations.Dim);

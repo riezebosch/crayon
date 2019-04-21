@@ -9,8 +9,9 @@ namespace Crayon
         private const string Normal = "\u001b[{0}m";
         private const string Bright = "\u001b[{0};1m";
         private const string Reset = "\u001b[0m";
-        
+
         private static Func<string, byte, string, string> _format;
+        private static Func<string, string, string, string> _formatStr;
         private static Func<int, IOutput> _chain;
         private static Func<string, IOutput> _chainFormat;
 
@@ -29,19 +30,26 @@ namespace Crayon
         public static void Enable()
         {
             ColorsOnWindows.Enable();
-            _format= (input, color, format) =>
+            _format = (input, color, format) =>
+             {
+                 var code = string.Format(format, (int)color);
+                 return $"{code}{input.FormattingAfterReset(code)}{Reset}";
+             };
+
+            _formatStr = (input, esc, format) =>
             {
-                var code = string.Format(format, (int) color);
-                return $"{code}{input.FormattingAfterReset(code)}{Reset}";
+                string msg = $"{esc}{input.FormattingAfterReset(esc)}{Reset}";
+                return msg;
             };
-            
+
             _chain = color => new OutputChain(color);
             _chainFormat = format => new OutputChain(format);
         }
-        
+
         public static void Disable()
         {
             _format = (input, code, format) => input;
+            _formatStr = (input, code, format) => input;
             _chain = color => new OutputChainNoColor();
             _chainFormat = format => new OutputChainNoColor();
         }
@@ -83,5 +91,42 @@ namespace Crayon
         public static IOutput Reversed() => _chain(Decorations.Reversed);
 
         public static IOutput FromRgb(byte r, byte g, byte b) => _chainFormat($"\u001b[38;2;{r};{g};{b}m");
+
+        /// <summary>
+        /// Adds rgb unicode escaping to string, in a loop this will produce a Rainbow
+        /// </summary>
+        /// <returns>Unicode color escaped string with reset at the end.</returns>
+        /// <param name="freq">The frequency of sine wave, how quickly each color changes.</param>
+        /// <param name="idx">The item index in loop, can go up or down.</param>
+        public static IOutput Rainbow(double freq, int idx)
+        {
+            byte r = Convert.ToByte(Math.Round(Math.Sin(freq * idx) * 127 + 128));
+            byte g = Convert.ToByte(Math.Round(Math.Sin(freq * idx + 2) * 127 + 128));
+            byte b = Convert.ToByte(Math.Round(Math.Sin(freq * idx + 4) * 127 + 128));
+            return _chainFormat($"\u001b[38;2;{r};{g};{b}m");
+        }
+
+        /// <summary>
+        /// Adds rgb unicode escaping to each item in the collection to produce a Rainbow
+        /// </summary>
+        /// <returns>Unicode color escaped string with sep after each item.</returns>
+        /// <param name="freq">The frequency of sine wave, how quickly each color changes.</param>
+        /// <param name="items">Any IEnumberable filled with strings.</param>
+        /// <param name="sep">Line separator.</param>
+        public static string Rainbow<Items>(double freq, Items items, string sep="\r\n")
+            where Items: System.Collections.IEnumerable
+        {
+            string msg = "";
+            int idx = 0;
+            foreach (string item in items)
+            {
+                byte r = Convert.ToByte(Math.Round(Math.Sin(freq * idx) * 127 + 128));
+                byte g = Convert.ToByte(Math.Round(Math.Sin(freq * idx + 2) * 127 + 128));
+                byte b = Convert.ToByte(Math.Round(Math.Sin(freq * idx + 4) * 127 + 128));
+                msg += _formatStr(item, $"\u001b[38;2;{r};{g};{b}m", Normal) + sep;
+                idx++;
+            }
+            return msg;
+        }
     }
 }

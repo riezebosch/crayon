@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace Crayon.ConsoleApp
@@ -18,6 +20,11 @@ namespace Crayon.ConsoleApp
             Console.WriteLine(Output.Bold().Green().Text($"starting green {Output.Red("then red")} must be green again"));
 
             Console.WriteLine(Output.FromRgb(55, 115, 155).Text("from rgb!"));
+
+            for (int i = 0; i < 10; i++)
+            {
+                Console.WriteLine(Output.Rainbow(.5, i).Text("rainbows"));
+            }
         }
     }
 }

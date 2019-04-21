@@ -12,4 +12,8 @@
       <ProjectReference Include="..\Crayon\Crayon.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Properties\" />
+    </ItemGroup>
+
 </Project>
