@@ -21,9 +21,14 @@ namespace Crayon.ConsoleApp
 
             Console.WriteLine(Output.FromRgb(55, 115, 155).Text("from rgb!"));
 
-            for (int i = 0; i < 10; i++)
+            for (var i = 0; i < 10; i++)
             {
                 Console.WriteLine(Output.Rainbow(.5, i).Text("rainbows"));
+            }
+            
+            foreach(var item in Output.Rainbow(.5, new[]{ "first", "second", "third"}))
+            {
+                Console.WriteLine(item);
             }
         }
     }
