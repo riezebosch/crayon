@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Text;
 
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Crayon.Tests")]
 
@@ -100,10 +102,10 @@ namespace Crayon
         /// <param name="idx">The item index in loop, can go up or down.</param>
         public static IOutput Rainbow(double freq, int idx)
         {
-            byte r = Convert.ToByte(Math.Round(Math.Sin(freq * idx) * 127 + 128));
-            byte g = Convert.ToByte(Math.Round(Math.Sin(freq * idx + 2) * 127 + 128));
-            byte b = Convert.ToByte(Math.Round(Math.Sin(freq * idx + 4) * 127 + 128));
-            return _chainFormat($"\u001b[38;2;{r};{g};{b}m");
+            var r = Convert.ToByte(Math.Round(Math.Sin(freq * idx) * 127 + 128));
+            var g = Convert.ToByte(Math.Round(Math.Sin(freq * idx + 2) * 127 + 128));
+            var b = Convert.ToByte(Math.Round(Math.Sin(freq * idx + 4) * 127 + 128));
+            return FromRgb(r, g, b);
         }
 
         /// <summary>
@@ -112,21 +114,16 @@ namespace Crayon
         /// <returns>Unicode color escaped string with sep after each item.</returns>
         /// <param name="freq">The frequency of sine wave, how quickly each color changes.</param>
         /// <param name="items">Any IEnumberable filled with strings.</param>
-        /// <param name="sep">Line separator.</param>
-        public static string Rainbow<Items>(double freq, Items items, string sep="\r\n")
-            where Items: System.Collections.IEnumerable
+        public static string Rainbow(double freq, IEnumerable<string> items)
         {
-            string msg = "";
-            int idx = 0;
-            foreach (string item in items)
+            var sb = new StringBuilder();
+            var idx = 0;
+            foreach (var item in items)
             {
-                byte r = Convert.ToByte(Math.Round(Math.Sin(freq * idx) * 127 + 128));
-                byte g = Convert.ToByte(Math.Round(Math.Sin(freq * idx + 2) * 127 + 128));
-                byte b = Convert.ToByte(Math.Round(Math.Sin(freq * idx + 4) * 127 + 128));
-                msg += _formatStr(item, $"\u001b[38;2;{r};{g};{b}m", Normal) + sep;
-                idx++;
+                sb.AppendLine(Rainbow(freq, idx++).Text(item));
             }
-            return msg;
+            
+            return sb.ToString();
         }
     }
 }
