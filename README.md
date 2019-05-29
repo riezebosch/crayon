@@ -6,7 +6,7 @@ An easy peasy tiny library for coloring console output in inline strings using A
 
 ## Examples
 
-```cs
+```c#
 Console.WriteLine(Output.Green($"green {Output.Red($"{Output.Bold("bold")} red")} green"));
 Console.WriteLine("normal");
 Console.WriteLine(Output.BrightBlue($"Bright {Output.Green("and normal green")}"));
@@ -23,9 +23,21 @@ The static methods accepting string input `Output.Red("input")` return formatted
 
 Or building up a formatter using `Output.Bold().Red().Text("input")` where the string is only returned after closing with the `Text` method. This can also be mixed with interpolated strings.
 
+## Rainbows 🌈
+
+Thanks to [DevinR528](https://github.com/devinRagotzy) we now have rainbows!
+
+```c#
+var rainbow = new Rainbow(0.5);
+for(var i = 0; i < 15; i++)
+{
+    Console.WriteLine(rainbow.Next().Bold().Text("rainbow"));
+}
+```
+
 ## How compatible is it?
 
-It works fine on evertyhing except for older Windows versions.
+It works fine on everything except for older Windows versions.
 
 ## Credits
 

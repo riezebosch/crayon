@@ -16,6 +16,5 @@ namespace Crayon
         IOutput Reversed();
         string Text(string input);
         IOutput FromRgb(byte r, byte g, byte b);
-        IOutput Rainbow(double freq, int index);
     }
 }
