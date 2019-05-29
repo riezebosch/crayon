@@ -145,19 +145,20 @@ namespace Crayon.Tests
         [Fact]
         public void RainbowForLoopAndItteratorSame()
         {
-            string[] test = new string[]
+            var test = new[]
             {
-                "rainbow",
-                "rainbow",
-                "rainbow"
+                "a",
+                "b",
+                "c"
             };
-            string chunk = Output.Rainbow(.5, test);
-            string[] lines = chunk.Split('\n');
-
-            for (int i = 0; i < 3; i++)
+            
+            var result = Output.Rainbow(.5, test);
+            result.Should().BeEquivalentTo(new[]
             {
-                Output.Rainbow(.5, i).Text("rainbow").Should().Be(lines[i]);
-            }
+                "\u001b[38;2;128;243;32ma\u001b[0m",
+                "\u001b[38;2;189;204;4mb\u001b[0m",
+                "\u001b[38;2;235;146;6mc\u001b[0m"
+            });
         }
     }
 }

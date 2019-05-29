@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Crayon.Tests")]
@@ -105,25 +106,11 @@ namespace Crayon
             var r = Convert.ToByte(Math.Round(Math.Sin(freq * idx) * 127 + 128));
             var g = Convert.ToByte(Math.Round(Math.Sin(freq * idx + 2) * 127 + 128));
             var b = Convert.ToByte(Math.Round(Math.Sin(freq * idx + 4) * 127 + 128));
+            
             return FromRgb(r, g, b);
         }
 
-        /// <summary>
-        /// Adds rgb unicode escaping to each item in the collection to produce a Rainbow
-        /// </summary>
-        /// <returns>Unicode color escaped string with sep after each item.</returns>
-        /// <param name="freq">The frequency of sine wave, how quickly each color changes.</param>
-        /// <param name="items">Any IEnumberable filled with strings.</param>
-        public static string Rainbow(double freq, IEnumerable<string> items)
-        {
-            var sb = new StringBuilder();
-            var idx = 0;
-            foreach (var item in items)
-            {
-                sb.AppendLine(Rainbow(freq, idx++).Text(item));
-            }
-            
-            return sb.ToString();
-        }
+        public static IEnumerable<string> Rainbow(double freq, IEnumerable<string> items) => 
+            items.Select((item, idx) => Rainbow(freq, idx).Text(item));
     }
 }
