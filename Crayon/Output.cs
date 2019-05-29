@@ -101,16 +101,6 @@ namespace Crayon
         /// <returns>Unicode color escaped string with reset at the end.</returns>
         /// <param name="freq">The frequency of sine wave, how quickly each color changes.</param>
         /// <param name="idx">The item index in loop, can go up or down.</param>
-        public static IOutput Rainbow(double freq, int idx)
-        {
-            var r = Convert.ToByte(Math.Round(Math.Sin(freq * idx) * 127 + 128));
-            var g = Convert.ToByte(Math.Round(Math.Sin(freq * idx + 2) * 127 + 128));
-            var b = Convert.ToByte(Math.Round(Math.Sin(freq * idx + 4) * 127 + 128));
-            
-            return FromRgb(r, g, b);
-        }
 
-        public static IEnumerable<string> Rainbow(double freq, IEnumerable<string> items) => 
-            items.Select((item, idx) => Rainbow(freq, idx).Text(item));
     }
 }

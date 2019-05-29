@@ -128,37 +128,5 @@ namespace Crayon.Tests
 
             decorations.Should().BeSubsetOf(methods);
         }
-
-        [Fact]
-        public void TestRainbow()
-        {
-            Output.Rainbow(.5, 1).Text("rainbow").Should().Be("\u001b[38;2;189;204;4mrainbow\u001b[0m");
-        }
-
-        [Fact]
-        public void NestingRainbow()
-        {
-            Output.Rainbow(.5, 1).Text($"rainbow {Output.Red("red ")} rainbow").Should()
-                .Be("\u001b[38;2;189;204;4mrainbow \u001b[31mred \u001b[0m\u001b[38;2;189;204;4m rainbow\u001b[0m");
-        }
-
-        [Fact]
-        public void RainbowForLoopAndItteratorSame()
-        {
-            var test = new[]
-            {
-                "a",
-                "b",
-                "c"
-            };
-            
-            var result = Output.Rainbow(.5, test);
-            result.Should().BeEquivalentTo(new[]
-            {
-                "\u001b[38;2;128;243;32ma\u001b[0m",
-                "\u001b[38;2;189;204;4mb\u001b[0m",
-                "\u001b[38;2;235;146;6mc\u001b[0m"
-            });
-        }
     }
 }
