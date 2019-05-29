@@ -151,7 +151,7 @@ namespace Crayon.Tests
                 "rainbow",
                 "rainbow"
             };
-            string chunk = Output.Rainbow(.5, test, sep: "\n");
+            string chunk = Output.Rainbow(.5, test);
             string[] lines = chunk.Split('\n');
 
             for (int i = 0; i < 3; i++)

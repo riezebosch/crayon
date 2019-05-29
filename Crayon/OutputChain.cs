@@ -38,10 +38,10 @@ namespace Crayon
         public IOutput FromRgb(byte r, byte g, byte b) => AppendFormat($"\u001b[38;2;{r};{g};{b}m");
         public IOutput Rainbow(double freq, int idx)
         {
-            byte r = Convert.ToByte(Math.Round(Math.Sin(freq * idx) * 127 + 128));
-            byte g = Convert.ToByte(Math.Round(Math.Sin(freq * idx + 2) * 127 + 128));
-            byte b = Convert.ToByte(Math.Round(Math.Sin(freq * idx + 4) * 127 + 128));
-            return AppendFormat($"\u001b[38;2;{r};{g};{b}m");
+            var r = Convert.ToByte(Math.Round(Math.Sin(freq * idx) * 127 + 128));
+            var g = Convert.ToByte(Math.Round(Math.Sin(freq * idx + 2) * 127 + 128));
+            var b = Convert.ToByte(Math.Round(Math.Sin(freq * idx + 4) * 127 + 128));
+            return FromRgb(r, g, b);
         }
 
         public IOutput Bold() => AppendFormat(Decorations.Bold);
