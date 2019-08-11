@@ -19,7 +19,7 @@ Console.WriteLine(Output.Bold().Green().Text($"starting green {Output.Red("then 
 
 ## Two modes
 
-The static methods accepting string input `Output.Red("input")` return formatted string output. This also works with nested interpolated strings `Output.Red($"input {Output.Bold("bold")}").
+The static methods accepting string input `Output.Red("input")` return formatted string output. This also works with nested interpolated strings `Output.Red($"input {Output.Bold("bold")}")`.
 
 Or building up a formatter using `Output.Bold().Red().Text("input")` where the string is only returned after closing with the `Text` method. This can also be mixed with interpolated strings.
 
