@@ -11,7 +11,7 @@
         <NeutralLanguage>en-US</NeutralLanguage>
         <AssemblyTitle>Crayon</AssemblyTitle>
         <Description>Chalk for .NET Core!</Description>
-        <PackageReleaseNotes>Output.FromRgb(55, 115, 233).Text("from rgb!")</PackageReleaseNotes>
+        <PackageReleaseNotes>"now also as extension method!".Bold().Green()</PackageReleaseNotes>
         <PackageTags>ansii;colors;chalk</PackageTags>
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
         <RepositoryType>git</RepositoryType>

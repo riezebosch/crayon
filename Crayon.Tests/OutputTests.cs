@@ -40,43 +40,42 @@ namespace Crayon.Tests
 
         [Fact]
         public void TestGreen() => 
-            Output
-                .Green("some text")
+            "some text"
+                .Green()
                 .Should()
                 .Be("\u001b[32msome text\u001b[0m");
 
         [Fact]
         public void TestRed() => 
-            Output
-                .Red("some text")
+            "some text"
+                .Red()
                 .Should()
                 .Be("\u001b[31msome text\u001b[0m");
 
         [Fact]
         public void NestingColourShouldRestoreOriginal() =>
-            Output
-                .Green($"green {Output.Red("red")} green")
+            $"green {"red".Red()} green".Green()
                 .Should()
                 .Be("\u001b[32mgreen \u001b[31mred\u001b[0m\u001b[32m green\u001b[0m");
 
         [Fact]
         public void TestBold() => 
-            Output
-                .Bold("some text")
+            "some text"
+                .Bold()
                 .Should()
                 .Be("\u001b[1msome text\u001b[0m");
 
         [Fact]
         public void TestDim() => 
-            Output
-                .Dim("some text")
+            "some text"
+                .Dim()
                 .Should()
                 .Be("\u001b[2msome text\u001b[0m");
 
         [Fact]
         public void NestedBoldRequiresReset() =>
-            Output
-                .Red($"{Output.Bold("bold")} text")
+            $"{"bold".Bold()} text"
+                .Red()
                 .Should()
                 .Be("\u001b[31m\u001b[1mbold\u001b[0m\u001b[31m text\u001b[0m");
 
@@ -87,7 +86,7 @@ namespace Crayon.Tests
             foreach (var (name, value) in colors)
             {
                 ColorMethod(name)
-                    .Invoke(null, new[] {"input"})
+                    .Invoke(null, new object[] {"input"})
                     .Should()
                     .Be($"\u001b[{value}minput\u001b[0m");
             }
@@ -100,7 +99,7 @@ namespace Crayon.Tests
             foreach (var (name, value) in colors)
             {
                 ColorMethod(name)
-                    .Invoke(null, new[] {"input"})
+                    .Invoke(null, new object[] {"input"})
                     .Should()
                     .Be($"\u001b[{value}minput\u001b[0m");
             }
@@ -116,7 +115,7 @@ namespace Crayon.Tests
                 method
                     .Should()
                     .NotBeNull($"No bright method found for {name}");
-                method.Invoke(null, new[] {"input"})
+                method.Invoke(null, new object[] {"input"})
                     .Should()
                     .Be($"\u001b[{value};1minput\u001b[0m");
             }

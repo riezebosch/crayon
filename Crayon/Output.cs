@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Crayon.Tests")]
 
@@ -49,27 +46,27 @@ namespace Crayon
             _chainFormat = format => new OutputChainNoColor();
         }
 
-        public static string Black(string input) => _format(input, Colors.Black, Normal);
-        public static string Red(string input) => _format(input, Colors.Red, Normal);
-        public static string Green(string input) => _format(input, Colors.Green, Normal);
-        public static string Yellow(string input) => _format(input, Colors.Yellow, Normal);
-        public static string Blue(string input) => _format(input, Colors.Blue, Normal);
-        public static string Magenta(string input) => _format(input, Colors.Magenta, Normal);
-        public static string Cyan(string input) => _format(input, Colors.Cyan, Normal);
-        public static string White(string input) => _format(input, Colors.White, Normal);
-        public static string Bold(string input) => _format(input, Decorations.Bold, Normal);
-        public static string Dim(string input) => _format(input, Decorations.Dim, Normal);
-        public static string Underline(string input) => _format(input, Decorations.Underline, Normal);
-        public static string Reversed(string input) => _format(input, Decorations.Reversed, Normal);
+        public static string Black(this string input) => _format(input, Colors.Black, Normal);
+        public static string Red(this string input) => _format(input, Colors.Red, Normal);
+        public static string Green(this string input) => _format(input, Colors.Green, Normal);
+        public static string Yellow(this string input) => _format(input, Colors.Yellow, Normal);
+        public static string Blue(this string input) => _format(input, Colors.Blue, Normal);
+        public static string Magenta(this string input) => _format(input, Colors.Magenta, Normal);
+        public static string Cyan(this string input) => _format(input, Colors.Cyan, Normal);
+        public static string White(this string input) => _format(input, Colors.White, Normal);
+        public static string Bold(this string input) => _format(input, Decorations.Bold, Normal);
+        public static string Dim(this string input) => _format(input, Decorations.Dim, Normal);
+        public static string Underline(this string input) => _format(input, Decorations.Underline, Normal);
+        public static string Reversed(this string input) => _format(input, Decorations.Reversed, Normal);
 
-        public static string BrightBlack(string input) => _format(input, Colors.Black, Bright);
-        public static string BrightRed(string input) => _format(input, Colors.Red, Bright);
-        public static string BrightGreen(string input) => _format(input, Colors.Green, Bright);
-        public static string BrightYellow(string input) => _format(input, Colors.Yellow, Bright);
-        public static string BrightBlue(string input) => _format(input, Colors.Blue, Bright);
-        public static string BrightMagenta(string input) => _format(input, Colors.Magenta, Bright);
-        public static string BrightCyan(string input) => _format(input, Colors.Cyan, Bright);
-        public static string BrightWhite(string input) => _format(input, Colors.White, Bright);
+        public static string BrightBlack(this string input) => _format(input, Colors.Black, Bright);
+        public static string BrightRed(this string input) => _format(input, Colors.Red, Bright);
+        public static string BrightGreen(this string input) => _format(input, Colors.Green, Bright);
+        public static string BrightYellow(this string input) => _format(input, Colors.Yellow, Bright);
+        public static string BrightBlue(this string input) => _format(input, Colors.Blue, Bright);
+        public static string BrightMagenta(this string input) => _format(input, Colors.Magenta, Bright);
+        public static string BrightCyan(this string input) => _format(input, Colors.Cyan, Bright);
+        public static string BrightWhite(this string input) => _format(input, Colors.White, Bright);
 
         public static IOutput Black() => _chain(Colors.Black);
         public static IOutput Red() => _chain(Colors.Red);
