@@ -20,47 +20,20 @@ namespace Crayon.Tests
             .Be("\u001b[32m\u001b[1minput\u001b[0m");
 
         [Fact]
-        public void OutputChainContainsMethodsForAllColors()
-        {
-            var colors = ConstantsNames<Colors>();
-            var methods = ColorMethods();
-
-            colors.Should().BeSubsetOf(methods);
-        }
+        public void OutputChainContainsMethodsForAllColors() => 
+            TestConstants<Colors>();
+        
+        [Fact]
+        public void OutputChainContainsMethodsForAllDecorations() =>
+            TestConstants<Decorations>();
 
         [Fact]
-        public void OutputChainContainsMethodsForAllDecorations()
-        {
-            var decorations = ConstantsNames<Decorations>();
-            var methods = ColorMethods();
-
-            decorations.Should().BeSubsetOf(methods);
-        }
+        public void AllOutputInSpecifiedColor() => 
+            TestMethods<Colors>();
 
         [Fact]
-        public void AllOutputInSpecifiedColor()
-        {
-            var colors = ConstantsFrom<Colors>();
-            foreach (var (name, value) in colors)
-            {
-                var o = new OutputChain(99);
-                o.GetType().GetMethod(name).Invoke(o, new object[0]);
-                o.Text("input").Should().Be($"\u001b[99m\u001b[{value}minput\u001b[0m");
-            }
-        }
-
-
-        [Fact]
-        public void AllOutputInSpecifiedDecoration()
-        {
-            var decorations = ConstantsFrom<Decorations>();
-            foreach (var (name, value) in decorations)
-            {
-                var o = new OutputChain(99);
-                o.GetType().GetMethod(name).Invoke(o, new object[0]);
-                o.Text("input").Should().Be($"\u001b[99m\u001b[{value}minput\u001b[0m");
-            }
-        }
+        public void AllOutputInSpecifiedDecoration() =>
+            TestMethods<Decorations>();
 
         [Fact]
         public void NestedResetsReplaced() => 
@@ -79,7 +52,13 @@ namespace Crayon.Tests
                 .Be("\u001b[38;2;55;115;155mfrom rgb!\u001b[0m");
 
         [Fact]
-        public void BoldFromRgb() => Output.Bold().FromRgb(55, 115, 155).Text("from rgb!").Should().Be("\u001b[1m\u001b[38;2;55;115;155mfrom rgb!\u001b[0m");
+        public void BoldFromRgb() => 
+            Output
+                .Bold()
+                .FromRgb(55, 115, 155)
+                .Text("from rgb!")
+                .Should()
+                .Be("\u001b[1m\u001b[38;2;55;115;155mfrom rgb!\u001b[0m");
         
         private static IEnumerable<string> ColorMethods() =>
             typeof(IOutput)
@@ -93,5 +72,24 @@ namespace Crayon.Tests
             typeof(T)
                 .GetRuntimeFields()
                 .Select(x => (x.Name, x.GetRawConstantValue()));
+        
+        private static void TestConstants<T>()
+        {
+            var colors = ConstantsNames<T>();
+            var methods = ColorMethods();
+
+            colors.Should().BeSubsetOf(methods);
+        }
+        
+        private static void TestMethods<T>()
+        {
+            var colors = ConstantsFrom<T>();
+            foreach (var (name, value) in colors)
+            {
+                var o = new OutputChain(99);
+                o.GetType().GetMethod(name).Invoke(o, new object[0]);
+                o.Text("input").Should().Be($"\u001b[99m\u001b[{value}minput\u001b[0m");
+            }
+        }
     }
 }

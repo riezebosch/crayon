@@ -16,27 +16,12 @@ namespace Crayon.Tests
             Output.Enable();
 
         [Fact]
-        public void Enable()
-        {
-            Environment.SetEnvironmentVariable("NO_COLOR", null);
-            typeof(Output).TypeInitializer.Invoke(null, null);
-            Output
-                .Blue()
-                .Should()
-                .BeOfType<OutputChain>();
-        }
-        
+        public void Enable() => 
+            TestInitialize(null, typeof(OutputChain));
+
         [Fact]
-        public void Disable()
-        {
-            Environment.SetEnvironmentVariable("NO_COLOR", "must-have-some-value");
-            typeof(Output).TypeInitializer.Invoke(null, null);
-            Output
-                .Blue()
-                .Should()
-                .BeOfType<OutputChainNoColor>();
-        }
-        
+        public void Disable() =>
+            TestInitialize("some-value", typeof(OutputChainNoColor));
 
         [Fact]
         public void TestGreen() => 
@@ -80,30 +65,12 @@ namespace Crayon.Tests
                 .Be("\u001b[31m\u001b[1mbold\u001b[0m\u001b[31m text\u001b[0m");
 
         [Fact]
-        public void AllOutputInSpecifiedColor()
-        {
-            var colors = ConstantsFrom<Colors>();
-            foreach (var (name, value) in colors)
-            {
-                ColorMethod(name)
-                    .Invoke(null, new object[] {"input"})
-                    .Should()
-                    .Be($"\u001b[{value}minput\u001b[0m");
-            }
-        }
-
-        [Fact] 
-        public void AllDecorationsInSpecifiedColor()
-        {
-            var colors = ConstantsFrom<Decorations>();
-            foreach (var (name, value) in colors)
-            {
-                ColorMethod(name)
-                    .Invoke(null, new object[] {"input"})
-                    .Should()
-                    .Be($"\u001b[{value}minput\u001b[0m");
-            }
-        }
+        public void AllOutputInSpecifiedColor() => 
+            TestConstants<Colors>();
+       
+        [Fact]
+        public void AllDecorationsInSpecifiedColor() => 
+            TestConstants<Decorations>();
 
         [Fact]
         public void AllOutputInSpecifiedBrightColor()
@@ -129,24 +96,12 @@ namespace Crayon.Tests
                 .Be("\u001b[30;1minput\u001b[0m");
 
         [Fact]
-        public void OutputContainsFactoryMethodsForAllColors()
-        {
-            var colors = ConstantsFrom<Colors>().Select(s => s.name);
-            var methods = ColorMethods();
-
-            colors.Should().BeSubsetOf(methods.Select(m => m.Name));
-            methods.ToList().ForEach(m => m.Invoke(null, Array.Empty<object>()));
-        }
+        public void OutputContainsFactoryMethodsForAllColors() => 
+            TestFactories<Colors>();
 
         [Fact]
-        public void OutputContainsFactoryMethodsForAllDecorations()
-        {
-            var decorations = ConstantsFrom<Decorations>().Select(s => s.name);
-            var methods = ColorMethods();
-
-            decorations.Should().BeSubsetOf(methods.Select(m => m.Name));
-            methods.ToList().ForEach(m => m.Invoke(null, Array.Empty<object>()));
-        }
+        public void OutputContainsFactoryMethodsForAllDecorations() => 
+            TestFactories<Decorations>();
 
         private static IEnumerable<MethodInfo> ColorMethods()
         {
@@ -162,5 +117,37 @@ namespace Crayon.Tests
             typeof(T)
                 .GetRuntimeFields()
                 .Select(x => (x.Name, x.GetRawConstantValue()));
+        
+        
+        private static void TestInitialize(string value, Type expected)
+        {
+            Environment.SetEnvironmentVariable("NO_COLOR", value);
+            typeof(Output).TypeInitializer.Invoke(null, null);
+            Output
+                .Blue()
+                .Should()
+                .BeOfType(expected);
+        }
+        
+        private static void TestConstants<T>()
+        {
+            var colors = ConstantsFrom<T>();
+            foreach (var (name, value) in colors)
+            {
+                ColorMethod(name)
+                    .Invoke(null, new object[] {"input"})
+                    .Should()
+                    .Be($"\u001b[{value}minput\u001b[0m");
+            }
+        }
+        
+        private static void TestFactories<T>()
+        {
+            var colors = ConstantsFrom<T>().Select(s => s.name);
+            var methods = ColorMethods();
+
+            colors.Should().BeSubsetOf(methods.Select(m => m.Name));
+            methods.ToList().ForEach(m => m.Invoke(null, Array.Empty<object>()));
+        }
     }
 }
