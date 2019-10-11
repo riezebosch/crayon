@@ -4,13 +4,11 @@ using Xunit;
 
 namespace Crayon.Tests
 {
-    [Collection("color")]
     public class NoColor
     {
-        public NoColor()
-        {
+        public NoColor() =>
             Output.Disable();
-        }
+
         [Fact]
         public void DisableColor()
         {
@@ -21,9 +19,6 @@ namespace Crayon.Tests
         }
 
         [Fact]
-        public void OutputChain()
-        {
-            Assert.IsType<OutputChainNoColor>(Output.Bold());
-        }
+        public void OutputChain() => Assert.IsType<OutputChainNoColor>(Output.Bold());
     }
 }

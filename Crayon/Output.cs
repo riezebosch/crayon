@@ -94,13 +94,5 @@ namespace Crayon
         public static IOutput Reversed() => _chain(Decorations.Reversed);
 
         public static IOutput FromRgb(byte r, byte g, byte b) => _chainFormat($"\u001b[38;2;{r};{g};{b}m");
-
-        /// <summary>
-        /// Adds rgb unicode escaping to string, in a loop this will produce a Rainbow
-        /// </summary>
-        /// <returns>Unicode color escaped string with reset at the end.</returns>
-        /// <param name="freq">The frequency of sine wave, how quickly each color changes.</param>
-        /// <param name="idx">The item index in loop, can go up or down.</param>
-
     }
 }

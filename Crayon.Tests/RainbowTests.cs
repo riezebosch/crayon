@@ -4,14 +4,11 @@ using Xunit;
 
 namespace Crayon.Tests
 {
-    [Collection("color")]
     public class RainbowTests
     {
-        public RainbowTests()
-        {
+        public RainbowTests() => 
             Output.Enable();
-        }
-        
+
         [Fact]
         public void Test()
         {
