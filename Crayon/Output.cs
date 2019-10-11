@@ -14,7 +14,6 @@ namespace Crayon
         private const string Reset = "\u001b[0m";
 
         private static Func<string, byte, string, string> _format;
-        private static Func<string, string, string, string> _formatStr;
         private static Func<int, IOutput> _chain;
         private static Func<string, IOutput> _chainFormat;
 
@@ -39,12 +38,6 @@ namespace Crayon
                  return $"{code}{input.FormattingAfterReset(code)}{Reset}";
              };
 
-            _formatStr = (input, esc, format) =>
-            {
-                string msg = $"{esc}{input.FormattingAfterReset(esc)}{Reset}";
-                return msg;
-            };
-
             _chain = color => new OutputChain(color);
             _chainFormat = format => new OutputChain(format);
         }
@@ -52,7 +45,6 @@ namespace Crayon
         public static void Disable()
         {
             _format = (input, code, format) => input;
-            _formatStr = (input, code, format) => input;
             _chain = color => new OutputChainNoColor();
             _chainFormat = format => new OutputChainNoColor();
         }
