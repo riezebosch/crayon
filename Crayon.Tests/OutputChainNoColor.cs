@@ -1,38 +1,37 @@
-using System;
 using System.Linq;
 using FluentAssertions;
 using Xunit;
 
 namespace Crayon.Tests
 {
-    public static class OutputChainNoColorTests
+    public static class OutputBuilderIgnoreFormatTests
     {
         [Fact]
-        public static void AlwaysReturnsItself()
+        public static void InputEqualsOutput()
         {
-            var output = new OutputChainNoColor();
-            typeof(IOutput)
+            var output = new OutputBuilderIgnoreFormat();
+            typeof(OutputBuilderIgnoreFormat)
                 .GetMethods()
-                .Where(m => m.ReturnType == typeof(IOutput))
-                .Where(m => !m.GetParameters().Any())
-                .Select(m => m.Invoke(output, Array.Empty<object>()))
+                .Where(m => m.ReturnType == typeof(string))
+                .Where(m => m.GetParameters().Length == 1)
+                .Select(m => m.Invoke(output, new object[] { "input" }))
                 .Should()
-                .AllBeEquivalentTo(output);
+                .AllBeEquivalentTo("input");
         }
         
         [Fact]
         public static void FromRgb()
         {
-            var output = new OutputChainNoColor();
+            var output = new OutputBuilderIgnoreFormat();
             output
-                .FromRgb(0, 0, 0)
+                .Rgb(0, 0, 0)
                 .Should()
                 .Be(output);
         }
 
         [Fact]
         public static void Text() =>
-            new OutputChainNoColor()
+            new OutputBuilderIgnoreFormat()
                 .Black()
                 .Text("input")
                 .Should()

@@ -3,13 +3,13 @@ using Xunit;
 
 namespace Crayon.Tests
 {
-    public class NoColor
+    public class DisableColorTests
     {
-        public NoColor() =>
+        public DisableColorTests() =>
             Output.Disable();
 
         [Fact]
-        public void DisableColor()
+        public void Disable()
         {
             Output
                 .Bold("text")
@@ -18,6 +18,7 @@ namespace Crayon.Tests
         }
 
         [Fact]
-        public void OutputChain() => Assert.IsType<OutputChainNoColor>(Output.Bold());
+        public void OutputBuilder() =>
+            Output.Bold().Should().BeOfType<OutputBuilderIgnoreFormat>();
     }
 }
