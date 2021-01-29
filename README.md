@@ -7,24 +7,15 @@ An easy peasy tiny library for coloring console output in inline strings using A
 ## Examples
 
 ```c#
-Console.WriteLine(Output.Green($"green {Output.Red($"{Output.Bold("bold")} red")} green"));
-Console.WriteLine($"The difference {"between bold".Bold()}, {"bright green".BrightGreen()} and {"dim".Dim()}".Green());
-Console.WriteLine("normal");
-Console.WriteLine(Output.BrightBlue($"Bright {Output.Green("and normal green")}"));
-Console.WriteLine(Output.Green($"The difference {Output.Bold("between bold")} and {Output.BrightGreen("bright green")}"));
-Console.WriteLine(Output.Green().Bold().Underline().Reversed().Text("hoi!"));
-Console.WriteLine(Output.Bold().Green().Text($"starting green {Output.Red("then red")} must be green again"));
+using static Crayon.Output;
+
+Console.WriteLine(Green($"green {Red($"{Bold("bold")} red")} green"));
+Console.WriteLine(Bright.Blue($"Bright {Green("and normal green")}"));
+Console.WriteLine(Green($"The difference {Bold("between bold")} and {Bright.Green("bright green")}"));
+Console.WriteLine(Bold().Green().Text($"starting green {Red("then red")} must be green again"));
 ```
 
 ![screenshot](screenshot.png)
-
-## Two modes
-
-The static methods accepting string input `Output.Red("input")` return formatted string output. 
-This also works with nested interpolated strings `Output.Red($"input {Output.Bold("bold")}")`.
-Or as extension methods (on `string`) `"input".Red().Bold()`.
-
-Or building up a formatter using `Output.Bold().Red().Text("input")` where the string is only returned after closing with the `Text` method. This can also be mixed with interpolated strings.
 
 ## Rainbows 🌈
 

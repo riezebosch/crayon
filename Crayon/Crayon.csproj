@@ -11,11 +11,11 @@
         <NeutralLanguage>en-US</NeutralLanguage>
         <AssemblyTitle>Crayon</AssemblyTitle>
         <Description>Chalk for .NET Core!</Description>
-        <PackageReleaseNotes>"now also as extension method!".Bold().Green()</PackageReleaseNotes>
+        <PackageReleaseNotes>Bold().Green().Background.Yellow("background support")</PackageReleaseNotes>
         <PackageTags>ansii;colors;chalk</PackageTags>
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
         <RepositoryType>git</RepositoryType>
         <RepositoryUrl>https://github.com/riezebosch/crayon.git</RepositoryUrl>
-        <Version>0.0.1</Version>
+        <Version>2.0.1</Version>
     </PropertyGroup>
 </Project>
