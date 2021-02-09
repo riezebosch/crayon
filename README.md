@@ -1,8 +1,14 @@
 [![build](https://ci.appveyor.com/api/projects/status/8dnbd2u8t737lm21/branch/master?svg=true)](https://ci.appveyor.com/project/riezebosch/crayon/branch/master)
 [![nuget](https://img.shields.io/nuget/v/Crayon.svg)](https://www.nuget.org/packages/Crayon/)
 
-# Crayon
+# 🖍 Crayon
 An easy peasy tiny library for coloring console output in inline strings using ANSI escape codes.
+
+# V2
+
+The API has changed to support background colors. 
+I dropped the extension methods on string and opted for the using static directive instead.
+All methods now have an overload for direct input so you no longer have to end with a `Text()` invocation.
 
 ## Examples
 
@@ -11,11 +17,50 @@ using static Crayon.Output;
 
 Console.WriteLine(Green($"green {Red($"{Bold("bold")} red")} green"));
 Console.WriteLine(Bright.Blue($"Bright {Green("and normal green")}"));
-Console.WriteLine(Green($"The difference {Bold("between bold")} and {Bright.Green("bright green")}"));
 Console.WriteLine(Bold().Green().Text($"starting green {Red("then red")} must be green again"));
 ```
 
 ![screenshot](screenshot.png)
+
+## Colors
+
+```c#
+Black()
+Red()
+Green()
+Yellow()
+Blue()
+Magenta()
+Cyan()
+White()
+```
+
+```c#
+Rgb(r, g, b)
+```
+
+```c#
+Background.Blue()
+Bright.Blue()
+```
+
+## Decorations
+
+```c#
+Bold()
+Dim()
+Underline()
+Reversed()
+```
+
+## Text
+
+```c#
+Blue().Underline().Text("input")
+Blue().Underline("input")
+```
+
+All colors and decorations have an overload with direct input and terminating the formatter.
 
 ## Rainbows 🌈
 
