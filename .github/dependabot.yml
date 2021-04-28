@@ -1,0 +1,15 @@
+version: 2
+updates:
+- package-ecosystem: nuget
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "04:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: coverlet.msbuild
+    versions:
+    - "> 2.8.0, < 3"
+  - dependency-name: coverlet.msbuild
+    versions:
+    - 3.0.2
