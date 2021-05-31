@@ -98,6 +98,13 @@ namespace Crayon.Tests
                 .Underline().Bright.Black().Text("input")
                 .Should()
                 .Be("\u001b[4m\u001b[30;1minput\u001b[0m");
+                
+        [Fact]
+        public void Null() => 
+            Output
+                .Underline().Bright.Black().Text(null)
+                .Should()
+                .Be("\u001b[4m\u001b[30;1m\u001b[0m");
 
 
         [Fact]
