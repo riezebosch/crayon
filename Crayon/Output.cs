@@ -10,7 +10,10 @@ namespace Crayon
 
         static Output()
         {
-            if (Environment.GetEnvironmentVariable("NO_COLOR") == null)
+            // initialized here because compiler does not understand that this is initialized for sure otherwise
+	        _output = () => new OutputBuilderIgnoreFormat();
+
+			if (Environment.GetEnvironmentVariable("NO_COLOR") == null)
             {
                 Enable();
             }

@@ -5,3 +5,4 @@ obj/
 .vs/
 reports/
 coverage.opencover.xml
+*.DotSettings.user
