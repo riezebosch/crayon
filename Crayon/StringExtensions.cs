@@ -1,6 +1,6 @@
 namespace Crayon
 {
-    public static class StringExtensions
+    internal static class StringExtensions
     {
         private const string Reset = "\u001b[0m";
         
