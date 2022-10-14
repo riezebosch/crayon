@@ -6,20 +6,13 @@ namespace Crayon
 {
     public static class Output
     {
-        private static Func<IOutput> _output;
+        private static Func<IOutput> _output = () => new OutputBuilderIgnoreFormat();
 
         static Output()
         {
-            // initialized here because compiler does not understand that this is initialized for sure otherwise
-	        _output = () => new OutputBuilderIgnoreFormat();
-
-			if (Environment.GetEnvironmentVariable("NO_COLOR") == null)
+            if (Environment.GetEnvironmentVariable("NO_COLOR") == null)
             {
                 Enable();
-            }
-            else
-            {
-                Disable();
             }
         }
 

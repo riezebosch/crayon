@@ -17,12 +17,19 @@ namespace Crayon.Tests
             Output.Enable();
 
         [Fact]
-        public void Enable() => 
-            TestInitialize(null, typeof(OutputBuilder));
+        public void Enable() =>
+            Blue()
+                .Should()
+                .BeOfType<OutputBuilder>();
 
         [Fact]
-        public void Disable() =>
-            TestInitialize("some-value", typeof(OutputBuilderIgnoreFormat));
+        public void Disable()
+        {
+            Output.Disable();
+            Blue()
+                .Should()
+                .BeOfType<OutputBuilderIgnoreFormat>();
+        }
 
         [Fact]
         public void TestGreen() => 
@@ -129,17 +136,8 @@ namespace Crayon.Tests
             typeof(T)
                 .GetRuntimeFields()
                 .Select(x => (x.Name, x.GetRawConstantValue()));
-        
-        
-        private static void TestInitialize(string value, Type expected)
-        {
-            Environment.SetEnvironmentVariable("NO_COLOR", value);
-            typeof(Output).TypeInitializer!.Invoke(null, null);
-            Blue()
-                .Should()
-                .BeOfType(expected);
-        }
-        
+
+
         private static void TestConstants<T>()
         {
             var colors = ConstantsFrom<T>();
